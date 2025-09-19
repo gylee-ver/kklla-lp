@@ -17,25 +17,34 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://example.com"),
   title: {
-    default: "kklla Landing",
-    template: "%s | kklla",
+    default: "KKLLA 와디즈 펀딩 사전 예약",
+    template: "%s | KKLLA",
   },
-  description: "메타 광고 트래픽 유입용 랜딩 페이지",
+  description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
-    title: "kklla Landing",
-    description: "메타 광고 트래픽 유입용 랜딩 페이지",
+    title: "KKLLA 와디즈 펀딩 사전 예약",
+    description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
     url: "/",
-    siteName: "kklla",
+    siteName: "KKLLA",
     images: [
       {
-        url: "/og.png",
+        url: "/kakao.png",
         width: 1200,
         height: 630,
-        alt: "kklla Landing",
+        alt: "KKLLA 와디즈 펀딩 사전 예약",
       },
     ],
     locale: "ko_KR",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KKLLA 와디즈 펀딩 사전 예약",
+    description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
+    images: ["/kakao.png"],
   },
   robots: {
     index: true,
