@@ -44,12 +44,13 @@ function OverlayImage({
   const [rects, setRects] = useState<Rect[]>([]);
 
   const analyze = useCallback(async () => {
+    const displaySrc = src.replace(/^\//, '/optimized/').replace(/\.png$/i, '.webp');
     const img = new window.Image();
     img.crossOrigin = "anonymous";
     const loaded = await new Promise<HTMLImageElement>((resolve, reject) => {
       img.onload = () => resolve(img);
       img.onerror = reject;
-      img.src = src;
+      img.src = displaySrc;
     });
     const width = loaded.naturalWidth;
     const height = loaded.naturalHeight;
@@ -179,7 +180,7 @@ function OverlayImage({
 
   return (
     <div ref={containerRef} className="relative w-full">
-      <img src={src} alt={alt} className="w-full h-auto block" />
+      <img src={src.replace(/^\//, '/optimized/').replace(/\.png$/i, '.webp')} alt={alt} className="w-full h-auto block" />
       {naturalSize && rects.length > 0
         ? rects.map((r, i) => (
             <a
@@ -213,7 +214,7 @@ export default function Home() {
   const [targetRects, setTargetRects] = useState<Rect[]>([]);
 
   const analyzeImage = useCallback(async () => {
-    const src = "/1.png";
+    const src = "/optimized/1.webp";
     const img = new window.Image();
     img.crossOrigin = "anonymous";
     const loaded = await new Promise<HTMLImageElement>((resolve, reject) => {
@@ -359,12 +360,12 @@ export default function Home() {
       >
         {/* 헤더 (sticky) */}
         <div className="w-full sticky top-0 z-30 bg-white">
-          <img src="/header.png" alt="헤더 이미지" className="w-full h-auto block" />
+          <img src="/optimized/header.webp" alt="헤더 이미지" className="w-full h-auto block" />
         </div>
 
         {/* 본문 이미지 (1.png) + 투명 오버레이 링크 */}
         <div ref={containerRef} className="relative w-full">
-          <img src="/1.png" alt="상세 이미지" className="w-full h-auto block" />
+          <img src="/optimized/1.webp" alt="상세 이미지" className="w-full h-auto block" />
 
           {naturalSize && targetRects.length > 0
             ? targetRects.map((r, i) => (
@@ -391,10 +392,10 @@ export default function Home() {
 
         {/* 2 ~ 3 단순 이미지 */}
         <div className="w-full">
-          <img src="/2.png" alt="섹션 2" className="w-full h-auto block" />
+          <img src="/optimized/2.webp" alt="섹션 2" className="w-full h-auto block" />
         </div>
         <div className="w-full">
-          <img src="/3.png" alt="섹션 3" className="w-full h-auto block" />
+          <img src="/optimized/3.webp" alt="섹션 3" className="w-full h-auto block" />
         </div>
 
         {/* 4.png: #00FFF0 근사치 CTA 탐지 */}
@@ -418,10 +419,10 @@ export default function Home() {
 
         {/* 6 ~ 7 단순 이미지 */}
         <div className="w-full">
-          <img src="/6.png" alt="섹션 6" className="w-full h-auto block" />
+          <img src="/optimized/6.webp" alt="섹션 6" className="w-full h-auto block" />
         </div>
         <div className="w-full">
-          <img src="/7.png" alt="섹션 7" className="w-full h-auto block" />
+          <img src="/optimized/7.webp" alt="섹션 7" className="w-full h-auto block" />
         </div>
 
         {/* 8.png: #00FF00 근사치 CTA 탐지 */}
