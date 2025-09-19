@@ -22,6 +22,7 @@ function OverlayImage({
   src,
   alt,
   targetColor,
+  targetColors,
   eventKey,
   tolerance = 30,
   aspectMin = 3.5,
@@ -29,7 +30,8 @@ function OverlayImage({
 }: {
   src: string;
   alt: string;
-  targetColor: RGB;
+  targetColor?: RGB;
+  targetColors?: RGB[]; // any-of colors
   eventKey: string;
   tolerance?: number;
   aspectMin?: number;
@@ -61,10 +63,19 @@ function OverlayImage({
     ctx.drawImage(loaded, 0, 0);
     const { data } = ctx.getImageData(0, 0, width, height);
 
-    const isWithin = (r: number, g: number, b: number) =>
-      Math.abs(r - targetColor.r) <= tolerance &&
-      Math.abs(g - targetColor.g) <= tolerance &&
-      Math.abs(b - targetColor.b) <= tolerance;
+    const isWithin = (r: number, g: number, b: number) => {
+      const candidates = targetColors && targetColors.length > 0 ? targetColors : (targetColor ? [targetColor] : []);
+      for (const c of candidates) {
+        if (
+          Math.abs(r - c.r) <= tolerance &&
+          Math.abs(g - c.g) <= tolerance &&
+          Math.abs(b - c.b) <= tolerance
+        ) {
+          return true;
+        }
+      }
+      return false;
+    };
 
     const visited = new Uint8Array(width * height);
     const out: Rect[] = [];
@@ -432,8 +443,8 @@ export default function Home() {
         <OverlayImage
           src="/8.png"
           alt="사전 예약하고 혜택 받기"
-          targetColor={{ r: 0, g: 255, b: 0 }}
-          tolerance={30}
+          targetColors={[{ r: 0, g: 255, b: 0 }, { r: 0, g: 255, b: 240 }]}
+          tolerance={40}
           eventKey="cta-8"
         />
       </div>
