@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) landing page project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
@@ -29,8 +29,34 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create `.env.local` and set the following:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_HOTJAR_ID=XXXXXXXX
+NEXT_PUBLIC_HOTJAR_SV=6
+```
+
+## Analytics
+- GA4 is injected via `app/providers/AnalyticsProvider.tsx` using `next/script`.
+- Hotjar is conditionally loaded when envs are present.
+- UTM parameters are captured once and stored in `sessionStorage.utm_params`.
+
+## Mobile-first fixed aspect layout
+- Wrap pages with `components/MobileFrame.tsx` to lock to a mobile canvas (default 390x844) while scaling on desktop.
+
+## Git & Vercel
+1. Initialize git and push:
+   ```bash
+   git init
+   git add .
+   git commit -m "chore: initial scaffold with mobile frame and analytics"
+   git branch -M main
+   git remote add origin <your-repo-url>
+   git push -u origin main
+   ```
+2. Import the repo into Vercel and set env vars in Project Settings → Environment Variables.
+3. Deploy. Preview and Production URLs will be created. Ensure `NEXT_PUBLIC_SITE_URL` matches the Production domain for sitemap/robots.
