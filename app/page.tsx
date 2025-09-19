@@ -95,8 +95,8 @@ function OverlayImage({
           continue;
         }
 
-        let qx = [x];
-        let qy = [y];
+        const qx = [x];
+        const qy = [y];
         visited[p] = 1;
         let qi = 0;
         let minX = x, minY = y, maxX = x, maxY = y;
@@ -147,7 +147,7 @@ function OverlayImage({
       }
     }
     setRects(out);
-  }, [src, targetColor, tolerance, aspectMin, minAreaRatio]);
+  }, [src, targetColor, targetColors, tolerance, aspectMin, minAreaRatio]);
 
   useEffect(() => {
     analyze();
@@ -160,7 +160,7 @@ function OverlayImage({
     if (!containerRef.current || !naturalSize) return 1;
     const displayedWidth = containerRef.current.clientWidth;
     return displayedWidth / naturalSize.w;
-  }, [naturalSize, containerRef.current?.clientWidth]);
+  }, [naturalSize]);
 
   const onClick = useCallback(
     (index: number) => {
@@ -259,17 +259,15 @@ export default function Home() {
         }
 
         // BFS로 연결된 영역 수집
-        let qx = [x];
-        let qy = [y];
+        const qx = [x];
+        const qy = [y];
         visited[p] = 1;
         let qi = 0;
         let minX = x, minY = y, maxX = x, maxY = y;
-        let count = 0;
         while (qi < qx.length) {
           const cx = qx[qi];
           const cy = qy[qi];
           qi++;
-          count++;
           if (cx < minX) minX = cx;
           if (cy < minY) minY = cy;
           if (cx > maxX) maxX = cx;
@@ -332,7 +330,7 @@ export default function Home() {
     if (!containerRef.current || !naturalSize) return 1;
     const displayedWidth = containerRef.current.clientWidth; // 컨테이너 너비와 동일
     return displayedWidth / naturalSize.w;
-  }, [naturalSize, containerRef.current?.clientWidth]);
+  }, [naturalSize]);
 
   const onOverlayClick = useCallback((index: number) => {
     try {
