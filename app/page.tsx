@@ -1,6 +1,6 @@
 "use client";
 
-import NextImage from "next/image";
+// 이미지 깨짐 이슈 방지를 위해 기본 <img> 사용
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 declare global {
@@ -179,7 +179,7 @@ function OverlayImage({
 
   return (
     <div ref={containerRef} className="relative w-full">
-      <NextImage src={src} alt={alt} width={780} height={1200} className="w-full h-auto block" />
+      <img src={src} alt={alt} className="w-full h-auto block" />
       {naturalSize && rects.length > 0
         ? rects.map((r, i) => (
             <a
@@ -359,25 +359,12 @@ export default function Home() {
       >
         {/* 헤더 (sticky) */}
         <div className="w-full sticky top-0 z-30 bg-white">
-          <NextImage
-            src="/header.png"
-            alt="헤더 이미지"
-            width={780}
-            height={400}
-            priority
-            className="w-full h-auto block"
-          />
+          <img src="/header.png" alt="헤더 이미지" className="w-full h-auto block" />
         </div>
 
         {/* 본문 이미지 (1.png) + 투명 오버레이 링크 */}
         <div ref={containerRef} className="relative w-full">
-          <NextImage
-            src="/1.png"
-            alt="상세 이미지"
-            width={780}
-            height={1200}
-            className="w-full h-auto block"
-          />
+          <img src="/1.png" alt="상세 이미지" className="w-full h-auto block" />
 
           {naturalSize && targetRects.length > 0
             ? targetRects.map((r, i) => (
@@ -404,10 +391,10 @@ export default function Home() {
 
         {/* 2 ~ 3 단순 이미지 */}
         <div className="w-full">
-          <NextImage src="/2.png" alt="섹션 2" width={780} height={1200} className="w-full h-auto block" />
+          <img src="/2.png" alt="섹션 2" className="w-full h-auto block" />
         </div>
         <div className="w-full">
-          <NextImage src="/3.png" alt="섹션 3" width={780} height={1200} className="w-full h-auto block" />
+          <img src="/3.png" alt="섹션 3" className="w-full h-auto block" />
         </div>
 
         {/* 4.png: #00FFF0 근사치 CTA 탐지 */}
@@ -431,10 +418,10 @@ export default function Home() {
 
         {/* 6 ~ 7 단순 이미지 */}
         <div className="w-full">
-          <NextImage src="/6.png" alt="섹션 6" width={780} height={1200} className="w-full h-auto block" />
+          <img src="/6.png" alt="섹션 6" className="w-full h-auto block" />
         </div>
         <div className="w-full">
-          <NextImage src="/7.png" alt="섹션 7" width={780} height={1200} className="w-full h-auto block" />
+          <img src="/7.png" alt="섹션 7" className="w-full h-auto block" />
         </div>
 
         {/* 8.png: #00FF00 근사치 CTA 탐지 */}
