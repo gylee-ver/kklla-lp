@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// 도메인 자동 감지: NEXT_PUBLIC_SITE_URL > VERCEL_URL > localhost
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://example.com"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "KKLLA 와디즈 펀딩 사전 예약",
     template: "%s | KKLLA",
