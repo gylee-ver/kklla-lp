@@ -417,9 +417,9 @@ export default function Home() {
           eventKey="cta-5"
         />
 
-        {/* 6 ~ 7 단순 이미지 */}
+        {/* 6 ~ 7 단순 이미지 (6은 6-1로 교체) */}
         <div className="w-full">
-          <img src="/optimized/6.webp" alt="섹션 6" className="w-full h-auto block" />
+          <img src="/optimized/6-1.webp" alt="섹션 6" className="w-full h-auto block" />
         </div>
         <div className="w-full">
           <img src="/optimized/7.webp" alt="섹션 7" className="w-full h-auto block" />

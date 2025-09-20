@@ -6,7 +6,7 @@ const projectRoot = path.resolve(process.cwd());
 const publicDir = path.join(projectRoot, 'public');
 const outDir = path.join(publicDir, 'optimized');
 
-const INPUTS = ['header.png', '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png'];
+const INPUTS = ['header.png', '1.png', '2.png', '3.png', '4.png', '5.png', '6-1.png', '7.png', '8.png', 'kakao.png'];
 
 async function ensureDir(dir) {
   await fs.promises.mkdir(dir, { recursive: true });
