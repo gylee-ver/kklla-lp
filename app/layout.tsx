@@ -66,6 +66,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google Analytics 4 */}
+        <Script
+          id="ga4-src"
+          src="https://www.googletagmanager.com/gtag/js?id=G-CQHNMQ7B9F"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-CQHNMQ7B9F');
+          `}
+        </Script>
         {/* Tally UTM passthrough */}
         <Script id="tally-utm" strategy="afterInteractive">
           {`(function(){
