@@ -66,6 +66,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Tally UTM passthrough */}
+        <Script id="tally-utm" strategy="afterInteractive">
+          {`(function(){
+            var BASE='https://tally.so/r/nPxdbx';
+            var KEYS=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','campaign_id','adset_id','ad_id','placement','site_source_name','usp','target'];
+            var qs=new URLSearchParams(location.search);
+            var stored={};
+            try{stored=JSON.parse(sessionStorage.getItem('utm_params')||'{}')}catch(e){}
+            var out=new URLSearchParams();
+            KEYS.forEach(function(k){var v=stored[k]||qs.get(k); if(v) out.set(k,v);});
+            var finalUrl=BASE+(out.toString()?('?'+out.toString()):'');
+            document.querySelectorAll('a[data-tally-cta]').forEach(function(a){ a.href=finalUrl; });
+          })();`}
+        </Script>
         {/* Google Tag Manager: place as high as possible in <head> */}
         <Script id="gtm-head" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

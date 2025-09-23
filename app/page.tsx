@@ -370,6 +370,7 @@ export default function Home() {
           {naturalSize && targetRects.length > 0
             ? targetRects.map((r, i) => (
                 <a
+                  data-tally-cta
                   key={`${r.left}-${r.top}-${r.width}-${r.height}-${i}`}
                   href={TALLY_URL}
                   target="_blank"
