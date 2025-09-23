@@ -184,6 +184,7 @@ function OverlayImage({
       {naturalSize && rects.length > 0
         ? rects.map((r, i) => (
             <a
+              data-keep-utm="true"
               key={`${src}-${i}-${r.left}-${r.top}`}
               href={TALLY_URL}
               target="_blank"
@@ -370,6 +371,7 @@ export default function Home() {
           {naturalSize && targetRects.length > 0
             ? targetRects.map((r, i) => (
                 <a
+                  data-keep-utm="true"
                   data-tally-cta
                   key={`${r.left}-${r.top}-${r.width}-${r.height}-${i}`}
                   href={TALLY_URL}

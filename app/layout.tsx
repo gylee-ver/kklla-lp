@@ -94,6 +94,20 @@ export default function RootLayout({
             document.querySelectorAll('a[data-tally-cta]').forEach(function(a){ a.href=finalUrl; });
           })();`}
         </Script>
+        {/* Keep full querystring pass-through for designated links */}
+        <Script id="keep-utm" strategy="afterInteractive">
+          {`(function(){
+            var search=location.search; if(!search) return;
+            var lpParams=new URLSearchParams(search);
+            document.querySelectorAll('a[data-keep-utm="true"]:not([data-tally-cta])').forEach(function(a){
+              try{
+                var url=new URL(a.href, location.origin);
+                lpParams.forEach(function(v,k){ url.searchParams.set(k,v); });
+                a.href=url.toString();
+              }catch(e){}
+            });
+          })();`}
+        </Script>
         {/* Google Tag Manager: place as high as possible in <head> */}
         <Script id="gtm-head" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
