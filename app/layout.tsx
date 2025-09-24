@@ -80,18 +80,53 @@ export default function RootLayout({
             gtag('config', 'G-CQHNMQ7B9F');
           `}
         </Script>
-        {/* Tally UTM passthrough */}
+        {/* Tally UTM passthrough (robust: initial apply + observer + click-capture) */}
         <Script id="tally-utm" strategy="afterInteractive">
           {`(function(){
             var BASE='https://tally.so/r/nPxdbx';
             var KEYS=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','campaign_id','adset_id','ad_id','placement','site_source_name','usp','target'];
-            var qs=new URLSearchParams(location.search);
-            var stored={};
-            try{stored=JSON.parse(sessionStorage.getItem('utm_params')||'{}')}catch(e){}
-            var out=new URLSearchParams();
-            KEYS.forEach(function(k){var v=stored[k]||qs.get(k); if(v) out.set(k,v);});
-            var finalUrl=BASE+(out.toString()?('?'+out.toString()):'');
-            document.querySelectorAll('a[data-tally-cta]').forEach(function(a){ a.href=finalUrl; });
+            function buildFinalUrl(){
+              var qs=new URLSearchParams(location.search||'');
+              var stored={}; try{stored=JSON.parse(sessionStorage.getItem('utm_params')||'{}')}catch(e){}
+              var out=new URLSearchParams();
+              KEYS.forEach(function(k){
+                var v = qs.get(k);
+                if(!v && stored) v = stored[k];
+                if(v!=null && v!=='') out.set(k, v);
+              });
+              var s=out.toString();
+              return BASE + (s?('?'+s):'');
+            }
+            function applyAll(){
+              var url = buildFinalUrl();
+              document.querySelectorAll('a[data-tally-cta]').forEach(function(a){ a.href = url; });
+            }
+            // initial
+            applyAll();
+            // observer for dynamically added anchors
+            try{
+              var obs=new MutationObserver(function(muts){
+                var need=false;
+                for(var i=0;i<muts.length;i++){
+                  var m=muts[i];
+                  if(m.addedNodes && m.addedNodes.length){ need=true; break; }
+                }
+                if(need) applyAll();
+              });
+              obs.observe(document.documentElement||document, {childList:true, subtree:true});
+            }catch(e){}
+            // click/pointerdown capture: last-moment correction
+            function retarget(e){
+              try{
+                var t = e.target;
+                if(!t) return;
+                var a = t.closest ? t.closest('a[data-tally-cta]') : null;
+                if(!a) return;
+                a.href = buildFinalUrl();
+              }catch(_){}
+            }
+            document.addEventListener('pointerdown', retarget, true);
+            document.addEventListener('click', retarget, true);
           })();`}
         </Script>
         {/* Keep full querystring pass-through for designated links */}
