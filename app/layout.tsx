@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "KKLLA",
     images: [
       {
-        url: "/kakao.png",
+        url: "/OpenGraph.png",
         width: 1200,
         height: 630,
         alt: "KKLLA 와디즈 펀딩 사전 예약",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "KKLLA 와디즈 펀딩 사전 예약",
     description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
-    images: ["/kakao.png"],
+    images: ["/OpenGraph.png"],
   },
   robots: {
     index: true,
