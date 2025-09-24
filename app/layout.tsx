@@ -25,11 +25,7 @@ export const metadata: Metadata = {
   },
   description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
-      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
-      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" }
-    ],
+    icon: "/favicon.ico",
   },
   openGraph: {
     title: "KKLLA 와디즈 펀딩 사전 예약",
