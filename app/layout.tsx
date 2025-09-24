@@ -25,7 +25,11 @@ export const metadata: Metadata = {
   },
   description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" }
+    ],
   },
   openGraph: {
     title: "KKLLA 와디즈 펀딩 사전 예약",
@@ -34,7 +38,7 @@ export const metadata: Metadata = {
     siteName: "KKLLA",
     images: [
       {
-        url: "/OpenGraph.png",
+        url: `${(process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : ""))}/OpenGraph.png`,
         width: 1200,
         height: 630,
         alt: "KKLLA 와디즈 펀딩 사전 예약",
@@ -47,7 +51,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "KKLLA 와디즈 펀딩 사전 예약",
     description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
-    images: ["/OpenGraph.png"],
+    images: [
+      `${(process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : ""))}/OpenGraph.png`,
+    ],
   },
   robots: {
     index: true,
