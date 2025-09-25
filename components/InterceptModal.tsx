@@ -143,7 +143,7 @@ export default function InterceptModal() {
       {/* Centered modal */}
       <div className="absolute inset-0 flex items-center justify-center p-4">
         <div ref={containerRef} className="relative w-[min(90vw,420px)]">
-          <img ref={imgRef} src="/intercept.png" alt="인터셉트" className="w-full h-auto block rounded-2xl" />
+          <img ref={imgRef} src="/intercept-1.png" alt="인터셉트" className="w-full h-auto block rounded-2xl" />
 
           {/* CTA overlay */}
           {natural && ctaRect && (
