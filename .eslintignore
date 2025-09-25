@@ -1,0 +1,4 @@
+# allow native img usage for optimized static assets
+app/page.tsx
+components/InterceptModal.tsx
+

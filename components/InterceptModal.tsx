@@ -13,6 +13,7 @@ export default function InterceptModal() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [ctaRect, setCtaRect] = useState<Rect | null>(null);
   const [natural, setNatural] = useState<{ w: number; h: number } | null>(null);
+  const [containerWidth, setContainerWidth] = useState<number>(0);
 
   // Once-per-session control
   useEffect(() => {
@@ -21,9 +22,9 @@ export default function InterceptModal() {
   }, []);
 
   const scale = useMemo(() => {
-    if (!containerRef.current || !natural) return 1;
-    return containerRef.current.clientWidth / natural.w;
-  }, [natural, containerRef.current?.clientWidth]);
+    if (!natural || !containerWidth) return 1;
+    return containerWidth / natural.w;
+  }, [natural, containerWidth]);
 
   const analyzeImage = useCallback(() => {
     const img = imgRef.current;
@@ -76,7 +77,7 @@ export default function InterceptModal() {
   // Back intercept
   useEffect(() => {
     // prepare state to catch first back
-    try { history.pushState(null, "", location.href); } catch (_) {}
+    try { history.pushState(null, "", location.href); } catch {}
     const onPop = (e: PopStateEvent) => {
       if (shown) return; // already shown this session
       e.preventDefault();
@@ -84,7 +85,7 @@ export default function InterceptModal() {
       setShown(true);
       sessionStorage.setItem("intercept_shown", "1");
       // neutralize current back
-      try { history.pushState(null, "", location.href); } catch (_) {}
+      try { history.pushState(null, "", location.href); } catch {}
     };
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
@@ -98,7 +99,17 @@ export default function InterceptModal() {
     else img.addEventListener("load", analyzeImage, { once: true });
   }, [open, analyzeImage]);
 
-  if (!open) return null;
+  // Track container width for scaling overlays
+  useEffect(() => {
+    if (!open) return;
+    const update = () => {
+      const el = containerRef.current;
+      setContainerWidth(el ? el.clientWidth : 0);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [open]);
 
   // Exit region heuristic (below CTA)
   const exitRect: Rect | null = useMemo(() => {
@@ -119,8 +130,10 @@ export default function InterceptModal() {
   const onExit = useCallback(() => {
     setOpen(false);
     // allow actual back
-    try { history.back(); } catch (_) {}
+    try { history.back(); } catch {}
   }, []);
+
+  if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-[1000]">
