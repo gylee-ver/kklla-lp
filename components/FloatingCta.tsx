@@ -50,7 +50,7 @@ export default function FloatingCta() {
       const scrolled = doc.scrollTop || document.body.scrollTop;
       const height = doc.scrollHeight - doc.clientHeight;
       const ratio = height > 0 ? scrolled / height : 0;
-      setShow(ratio >= 0.25);
+      setShow(ratio >= 0.15);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -62,21 +62,22 @@ export default function FloatingCta() {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-4 z-[900] px-4 pointer-events-none">
+    <div className="fixed inset-x-0 bottom-10 z-[900] px-4 pointer-events-none">
       <div className="mx-auto w-full max-w-[420px] relative pointer-events-auto">
         {/* 라벨 */}
-        <div className="absolute -top-6 right-1 text-[11px] font-bold select-none">
-          <span
-            className={`bg-clip-text text-transparent animate-[hue_3s_linear_infinite]`
-            }
-            style={{
-              backgroundImage: urgent
-                ? "linear-gradient(90deg, #ff4d4f, #ff7875, #ff4d4f)"
-                : "linear-gradient(90deg, #ffe58f, #ffd666, #ffe58f)",
-            }}
-          >
-            선착순 50명 마감임박! {confirmed}/{TOTAL}
-          </span>
+        <div className="absolute -top-10 right-2 select-none">
+          <div className="rounded-xl bg-black/60 px-3 py-1 backdrop-blur-sm">
+            <span
+              className={`text-sm md:text-base bg-clip-text text-transparent animate-[hue_3s_linear_infinite]`}
+              style={{
+                backgroundImage: urgent
+                  ? "linear-gradient(90deg, #ff4d4f, #ff7875, #ff4d4f)"
+                  : "linear-gradient(90deg, #ffe58f, #ffd666, #ffe58f)",
+              }}
+            >
+              선착순 50명 <span className="font-extrabold">마감임박!</span> {confirmed}/{TOTAL}
+            </span>
+          </div>
         </div>
 
         {/* 버튼 */}
