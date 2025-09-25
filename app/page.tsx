@@ -3,6 +3,7 @@
 // 이미지 깨짐 이슈 방지를 위해 기본 <img> 사용
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import LandingPromoModal from "@/components/LandingPromoModal";
+import FloatingCta from "@/components/FloatingCta";
 import InterceptModal from "@/components/InterceptModal";
 
 declare global {
@@ -362,6 +363,7 @@ export default function Home() {
         className="mx-auto flex flex-col items-stretch"
       >
         <LandingPromoModal />
+        <FloatingCta />
         <InterceptModal />
         {/* 헤더 (sticky) */}
         <div className="w-full sticky top-0 z-30 bg-white">
