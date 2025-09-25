@@ -2,6 +2,7 @@
 
 // 이미지 깨짐 이슈 방지를 위해 기본 <img> 사용
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import InterceptModal from "@/components/InterceptModal";
 
 declare global {
   interface Window {
@@ -359,6 +360,7 @@ export default function Home() {
         style={{ width: 390 }}
         className="mx-auto flex flex-col items-stretch"
       >
+        <InterceptModal />
         {/* 헤더 (sticky) */}
         <div className="w-full sticky top-0 z-30 bg-white">
           <img src="/optimized/header.webp" alt="헤더 이미지" className="w-full h-auto block" />
