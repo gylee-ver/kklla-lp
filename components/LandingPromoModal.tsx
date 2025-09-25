@@ -61,7 +61,7 @@ export default function LandingPromoModal() {
     <div className="fixed inset-0 z-[999]">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={dismiss} />
       <div className="absolute inset-0 flex items-center justify-center p-4">
-        <div ref={imgContainerRef} className="relative w-[min(90vw,480px)] select-none">
+        <div ref={imgContainerRef} className="relative w-[min(90vw,390px)] select-none">
           <Image
             src={src}
             alt="프로모션"

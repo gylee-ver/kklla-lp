@@ -62,13 +62,13 @@ export default function FloatingCta() {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-10 z-[900] px-4 pointer-events-none">
-      <div className="mx-auto w-full max-w-[420px] relative pointer-events-auto">
+    <div className="fixed inset-x-0 bottom-16 z-[900] px-4 pointer-events-none">
+      <div className="mx-auto w-full max-w-[390px] relative pointer-events-auto">
         {/* 라벨 */}
-        <div className="absolute -top-10 right-2 select-none">
-          <div className="rounded-xl bg-black/60 px-3 py-1 backdrop-blur-sm">
+        <div className="absolute -top-12 right-0 select-none">
+          <div className="rounded-full bg-black/60 px-4 py-1.5 backdrop-blur-sm">
             <span
-              className={`text-sm md:text-base bg-clip-text text-transparent animate-[hue_3s_linear_infinite]`}
+              className={`text-base md:text-lg bg-clip-text text-transparent animate-[hue_3s_linear_infinite]`}
               style={{
                 backgroundImage: urgent
                   ? "linear-gradient(90deg, #ff4d4f, #ff7875, #ff4d4f)"
