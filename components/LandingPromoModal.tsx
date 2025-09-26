@@ -5,7 +5,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 
 export default function LandingPromoModal() {
   const [open, setOpen] = useState(false);
-  const [src, setSrc] = useState<string>("/opening.png");
+  const [src, setSrc] = useState<string>("/optimized/opening.webp");
   const imgContainerRef = useRef<HTMLDivElement | null>(null);
   const [natural, setNatural] = useState<{ w: number; h: number } | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
@@ -35,7 +35,7 @@ export default function LandingPromoModal() {
 
   const onError = () => {
     // fallback 이미지 시도
-    if (src !== "/Group 58.png") setSrc("/Group 58.png");
+    if (src !== "/opening.png") setSrc("/opening.png");
   };
 
   const dismiss = () => {

@@ -90,7 +90,7 @@ export default function FloatingCta() {
           className="block w-full"
         >
           <Image
-            src="/low-floating.png"
+            src="/optimized/low-floating.webp"
             alt="사전 예약하고 혜택 받기"
             width={1200}
             height={210}
