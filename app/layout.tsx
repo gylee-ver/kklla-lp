@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AnalyticsProvider from "./providers/AnalyticsProvider";
@@ -15,56 +14,53 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const h = await headers();
-  const forwardedHost = h.get("x-forwarded-host") || h.get("host") || undefined;
-  const forwardedProto = h.get("x-forwarded-proto") || "https";
-  const envSite = process.env.NEXT_PUBLIC_SITE_URL;
-  const base = envSite || (forwardedHost ? `${forwardedProto}://${forwardedHost}` : "https://kklla-lp.vercel.app");
-
-  const ogImage = `${base}/OpenGraph.png`;
-
-  return {
-    metadataBase: new URL(base),
-    title: {
-      default: "KKLLA 와디즈 펀딩 사전 예약",
-      template: "%s | KKLLA",
-    },
+export const metadata: Metadata = {
+  title: "KKLLA 와디즈 펀딩 사전 예약",
+  description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
+  metadataBase: new URL('https://kklla-lp.vercel.app'),
+  icons: {
+    icon: "https://kklla-lp.vercel.app/favicon-1.ico",
+  },
+  openGraph: {
+    title: "KKLLA 와디즈 펀딩 사전 예약",
     description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
-    icons: {
-      icon: "/favicon-1.ico",
-    },
-    openGraph: {
-      title: "KKLLA 와디즈 펀딩 사전 예약",
-      description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
-      url: "/",
-      siteName: "KKLLA",
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: "KKLLA 와디즈 펀딩 사전 예약",
-        },
-      ],
-      locale: "ko_KR",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "KKLLA 와디즈 펀딩 사전 예약",
-      description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
-      images: [ogImage],
-    },
-    robots: {
+    url: 'https://kklla-lp.vercel.app',
+    siteName: 'KKLLA',
+    locale: 'ko_KR',
+    type: 'website',
+    images: [
+      {
+        url: "https://kklla-lp.vercel.app/OpenGraph.png",
+        width: 1200,
+        height: 630,
+        alt: "KKLLA 와디즈 펀딩 사전 예약",
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "KKLLA 와디즈 펀딩 사전 예약",
+    description: "KKLLA X 와디즈 펀딩 사전 예약 사이트",
+    images: ["https://kklla-lp.vercel.app/OpenGraph.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
       index: true,
       follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
-    alternates: {
-      canonical: "/",
+  },
+  alternates: {
+    canonical: 'https://kklla-lp.vercel.app',
+    languages: {
+      'ko': 'https://kklla-lp.vercel.app',
     },
-  };
-}
+  },
+};
 
 export default function RootLayout({
   children,
@@ -72,8 +68,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <head>
+        <link rel="icon" href="/favicon-1.ico" />
+        <link rel="shortcut icon" href="/favicon-1.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#ffffff" />
+        
         {/* Google Analytics 4 */}
         <Script
           id="ga4-src"
