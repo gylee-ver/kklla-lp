@@ -370,7 +370,7 @@ export default function Home() {
         <div className="w-full sticky top-0 z-30 bg-white">
           <img src="/optimized/header.webp" alt="헤더 이미지" className="w-full h-auto block" />
           {/* 헤더 하단 우측 '공유하기' 버튼 (헤더와 같이 sticky) */}
-          <div className="absolute right-3 -bottom-4">
+          <div className="absolute right-3 -bottom-10 md:-bottom-12 z-40">
             <ShareButton />
           </div>
         </div>
